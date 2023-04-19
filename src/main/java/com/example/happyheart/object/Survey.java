@@ -6,7 +6,6 @@ import java.sql.Timestamp;
 public class Survey {
 
     private String parkingId;
-    private Parking.occupancy occupancy;
     private Boolean safety;
     private Long rate;
     private String userName;
@@ -18,14 +17,6 @@ public class Survey {
 
     public void setParkingId(String parkingId) {
         this.parkingId = parkingId;
-    }
-
-    public Parking.occupancy getOccupancy() {
-        return occupancy;
-    }
-
-    public void setOccupancy(Parking.occupancy occ) {
-        this.occupancy = occ;
     }
 
     public Boolean getSafety() {
