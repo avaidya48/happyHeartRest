@@ -1,4 +1,4 @@
-package com.example.fabnavrest;
+package com.example.happyheart;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,13 +1,8 @@
-package com.example.fabnavrest.controller;
+package com.example.happyheart.controller;
 
-import com.example.fabnavrest.object.Parking;
-import com.example.fabnavrest.object.User;
-import com.example.fabnavrest.service.FirebaseService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.google.cloud.firestore.Firestore;
-import org.json.JSONException;
+import com.example.happyheart.object.User;
+import com.example.happyheart.service.FirebaseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.concurrent.ExecutionException;

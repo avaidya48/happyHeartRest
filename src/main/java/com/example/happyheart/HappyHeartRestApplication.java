@@ -1,4 +1,4 @@
-package com.example.fabnavrest;
+package com.example.happyheart;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

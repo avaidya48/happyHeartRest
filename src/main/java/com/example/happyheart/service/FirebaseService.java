@@ -1,11 +1,9 @@
-package com.example.fabnavrest.service;
+package com.example.happyheart.service;
 
-import com.example.fabnavrest.object.Parking;
-import com.example.fabnavrest.object.Survey;
-import com.example.fabnavrest.object.User;
+import com.example.happyheart.object.Survey;
+import com.example.happyheart.object.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.api.core.ApiFuture;
-import java.sql.Timestamp;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
 import com.google.firebase.database.IgnoreExtraProperties;
@@ -13,7 +11,6 @@ import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Field;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.function.BinaryOperator;

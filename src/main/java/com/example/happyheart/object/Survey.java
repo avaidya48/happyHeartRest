@@ -1,6 +1,5 @@
-package com.example.fabnavrest.object;
+package com.example.happyheart.object;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import java.sql.Timestamp;
 
 
