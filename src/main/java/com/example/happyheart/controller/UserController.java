@@ -13,7 +13,6 @@ public class UserController {
     @Autowired
     FirebaseService firebaseService;
 
-
     @GetMapping("/getUserDetails")
     public User getUserDetails(@RequestHeader String name) throws ExecutionException, InterruptedException {
         return firebaseService.getUserDetails(name);

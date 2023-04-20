@@ -1,5 +1,6 @@
 package com.example.happyheart.service;
 
+import com.example.happyheart.object.MedicalDetails;
 import com.example.happyheart.object.User;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
@@ -97,7 +98,12 @@ public class FirebaseService {
         return  "Done";
     }
 
-
+    public String createLatestMedicalDetails(MedicalDetails medicalDetails) throws ExecutionException, InterruptedException
+    {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        ApiFuture<WriteResult> collectionsApiFuture = dbFirestore.collection("medical_details").document().set(medicalDetails);
+        return collectionsApiFuture.get().getUpdateTime().toString();
+    }
 
 
 
