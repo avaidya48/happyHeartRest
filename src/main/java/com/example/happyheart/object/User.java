@@ -1,41 +1,24 @@
 package com.example.happyheart.object;
 
 
+import com.google.api.client.util.DateTime;
+
+import java.util.Date;
 
 public class User {
-    private enum occupancy {
-        EMPTY,
-        SOMEWHAT_FULL,
-        HALF_FULL,
-        ALMOST_FULL,
-        FULL
-    }
 
-    private String userName;
+    private String email;
     private String password;
-    private Integer paymentMax;
-    private Boolean disabilityFriendly;
-    private Integer radius;
-    private Boolean safetyPreference;
-    private Integer completedSurveys;
-    private Boolean eligibleForRewards;
-
-    public User(String userName, String password) {
-        super();
-        this.userName = userName;
-        this.password = password;
+    private String firstName;
+    private String lastName;
+    private String gender;
+    //private DateTime birthdate;
+    public String getEmail() {
+        return email;
     }
 
-    public User(){
-        super();
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -46,54 +29,48 @@ public class User {
         this.password = password;
     }
 
-    public Integer getPaymentMax() {
-        return paymentMax;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setPaymentMax(Integer paymentMax) {
-        this.paymentMax = paymentMax;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public Boolean getDisabilityFriendly() {
-        return disabilityFriendly;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setDisabilityFriendly(Boolean disabilityFriendly) {
-        this.disabilityFriendly = disabilityFriendly;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public Integer getRadius() {
-        return radius;
+    public String getGender() {
+        return gender;
     }
 
-
-    public void setRadius(Integer radius) {
-        this.radius = radius;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
-    public Boolean getSafetyPreference() {
-        return safetyPreference;
+    /*public DateTime getBirthdate() {
+        return birthdate;
     }
 
-    public void setSafetyPreference(Boolean safetyPreference) {
-        this.safetyPreference = safetyPreference;
+    public void setBirthdate(DateTime birthdate) {
+        this.birthdate = birthdate;
+    }*/
+
+    public User(String email, String password) {
+        super();
+        this.email = email;
+        this.password = password;
     }
 
-    public Integer getCompletedSurveys() {
-        return completedSurveys;
+    public User(){
+        super();
     }
 
-    public void setCompletedSurveys(Integer completedSurveys) {
-        this.completedSurveys = completedSurveys;
-    }
-
-    public Boolean getEligibleForRewards() {
-        return eligibleForRewards;
-    }
-
-    public void setEligibleForRewards(Boolean eligibleForRewards) {
-        this.eligibleForRewards = eligibleForRewards;
-    }
 
 
 }

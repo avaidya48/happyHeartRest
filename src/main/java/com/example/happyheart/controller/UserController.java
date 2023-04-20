@@ -13,30 +13,16 @@ public class UserController {
     @Autowired
     FirebaseService firebaseService;
 
-    @GetMapping("/getUserDetails")
-    public User getUserDetails(@RequestHeader String name) throws ExecutionException, InterruptedException {
-        return firebaseService.getUserDetails(name);
+    @PostMapping("/login")
+    public String login(@RequestBody User user) throws ExecutionException, InterruptedException {
+        return firebaseService.login(user);
     }
 
-    @PostMapping("/createUser")
-    public String createUser(@RequestBody User user) throws ExecutionException, InterruptedException {
-        return firebaseService.saveUserDetails(user);
+    @PostMapping("/register")
+    public User register(@RequestBody User user) throws ExecutionException, InterruptedException {
+        return firebaseService.register(user);
     }
 
-    @PutMapping("/updateUser")
-    public String updateUser(@RequestBody User user) throws ExecutionException, InterruptedException {
-        return firebaseService.saveUserDetails(user);
-    }
-
-    @DeleteMapping("/deleteUser")
-    public String deleteUser(@RequestHeader String userName) throws ExecutionException, InterruptedException {
-        return firebaseService.deleteUser(userName);
-    }
-
-    @GetMapping("/findGeofenceRadius")
-    public Integer findRadius(@RequestHeader String userName) throws ExecutionException, InterruptedException {
-        return firebaseService.findRadius(userName);
-    }
 
 
 
