@@ -12,7 +12,7 @@ public class User {
     private String firstName;
     private String lastName;
     private String gender;
-    //private DateTime birthdate;
+    private String birthdate;
     public String getEmail() {
         return email;
     }
@@ -53,13 +53,13 @@ public class User {
         this.gender = gender;
     }
 
-    /*public DateTime getBirthdate() {
+    public String getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(DateTime birthdate) {
+    public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
-    }*/
+    }
 
     public User(String email, String password) {
         super();
