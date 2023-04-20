@@ -47,7 +47,7 @@ public class FirebaseService {
     public List<MedicalDetails> getMedicalDetails(String email) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         CollectionReference medData = dbFirestore.collection("medical_details");
-        Query query = medData.whereEqualTo("username", email);
+        Query query = medData.whereEqualTo("email", email);
         ApiFuture<QuerySnapshot> querySnapshot = query.get();
 
         List<MedicalDetails> toReturn = new ArrayList<>();

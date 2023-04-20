@@ -7,12 +7,12 @@ public class MedicalDetails
     private float weight;
     private int heart_rate;
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
     /*
     {
@@ -24,7 +24,7 @@ public class MedicalDetails
 }
     * */
 
-    private String username;
+    private String email;
 
     public void setDiastolic_pressure(float diastolic_pressure) {
         this.diastolic_pressure = diastolic_pressure;
