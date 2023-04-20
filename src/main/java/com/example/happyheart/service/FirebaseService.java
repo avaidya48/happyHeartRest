@@ -8,6 +8,8 @@ import com.google.firebase.cloud.FirestoreClient;
 import com.google.firebase.database.IgnoreExtraProperties;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 
@@ -35,23 +37,27 @@ public class FirebaseService {
         return "User Does Not exist";
     }
 
-    public User register(User user) throws ExecutionException, InterruptedException {
+    public String register(User user) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         ApiFuture<WriteResult> collectionsApiFuture = dbFirestore.collection("user").document(user.getEmail()).set(user);
-
-        DocumentReference documentReference = dbFirestore.collection("user").document(user.getEmail());
-
-        ApiFuture<DocumentSnapshot> future = documentReference.get();
-
-        DocumentSnapshot document = future.get();
-
-        User toReturn = null;
-        if(document.exists()){
-            toReturn = document.toObject(User.class);
-        }
-        return toReturn;
+        return collectionsApiFuture.get().getUpdateTime().toString();
 
     }
+
+    public List<MedicalDetails> getMedicalDetails(String email) throws ExecutionException, InterruptedException {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        CollectionReference medData = dbFirestore.collection("medical_details");
+        Query query = medData.whereEqualTo("username", email);
+        ApiFuture<QuerySnapshot> querySnapshot = query.get();
+
+        List<MedicalDetails> toReturn = new ArrayList<>();
+        for (DocumentSnapshot document : querySnapshot.get().getDocuments()) {
+            toReturn.add(document.toObject(MedicalDetails.class));
+        }
+        return toReturn;
+    }
+
+
 
 
     public String createLatestMedicalDetails(MedicalDetails medicalDetails) throws ExecutionException, InterruptedException
