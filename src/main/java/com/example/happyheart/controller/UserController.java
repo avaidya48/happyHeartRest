@@ -1,5 +1,6 @@
 package com.example.happyheart.controller;
 
+import com.example.happyheart.object.Appointment;
 import com.example.happyheart.object.MedicalDetails;
 import com.example.happyheart.object.User;
 import com.example.happyheart.service.FirebaseService;
@@ -31,6 +32,10 @@ public class UserController {
     }
 
 
+    @GetMapping("/getAppointments")
+    public List<Appointment> getAppointments(@RequestHeader String email) throws ExecutionException, InterruptedException {
+        return firebaseService.getAppointments(email);
+    }
 
 
 }

@@ -1,5 +1,6 @@
 package com.example.happyheart.service;
 
+import com.example.happyheart.object.Appointment;
 import com.example.happyheart.object.MedicalDetails;
 import com.example.happyheart.object.User;
 import com.google.api.core.ApiFuture;
@@ -44,6 +45,13 @@ public class FirebaseService {
 
     }
 
+    public String createAppointment(Appointment appointment) throws ExecutionException, InterruptedException {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        ApiFuture<WriteResult> collectionsApiFuture = dbFirestore.collection("appointments").document().set(appointment);
+        return collectionsApiFuture.get().getUpdateTime().toString();
+
+    }
+
     public List<MedicalDetails> getMedicalDetails(String email) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         CollectionReference medData = dbFirestore.collection("medical_details");
@@ -57,6 +65,18 @@ public class FirebaseService {
         return toReturn;
     }
 
+    public List<Appointment> getAppointments(String email) throws ExecutionException, InterruptedException {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        CollectionReference medData = dbFirestore.collection("appointments");
+        Query query = medData.whereEqualTo("email", email);
+        ApiFuture<QuerySnapshot> querySnapshot = query.get();
+
+        List<Appointment> toReturn = new ArrayList<>();
+        for (DocumentSnapshot document : querySnapshot.get().getDocuments()) {
+            toReturn.add(document.toObject(Appointment.class));
+        }
+        return toReturn;
+    }
 
 
 
@@ -66,6 +86,8 @@ public class FirebaseService {
         ApiFuture<WriteResult> collectionsApiFuture = dbFirestore.collection("medical_details").document().set(medicalDetails);
         return collectionsApiFuture.get().getUpdateTime().toString();
     }
+
+
 
 
 
