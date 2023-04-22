@@ -80,15 +80,76 @@ public class FirebaseService {
 
 
 
-    public String createLatestMedicalDetails(MedicalDetails medicalDetails) throws ExecutionException, InterruptedException
+    public String getAllMedicalDetails(MedicalDetails medicalDetails) throws ExecutionException, InterruptedException
     {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         ApiFuture<WriteResult> collectionsApiFuture = dbFirestore.collection("medical_details").document().set(medicalDetails);
         return collectionsApiFuture.get().getUpdateTime().toString();
     }
+    
+     public List<MedicalDetails> getLatestMedicalDetails(String email) throws ExecutionException, InterruptedException, ParseException
+    {
+        List<MedicalDetails> allRecords = getAllMedicalDetails(email);
+        List<MedicalDetails> toReturn = new ArrayList<>();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+
+        for(int i = 0; i < allRecords.size(); i++)
+        {
+            Date date = formatter.parse(allRecords.get(i).getDate());
+            allRecords.get(i).set_date(date);
+        }
+        Collections.sort(allRecords, new Comparator<MedicalDetails>()
+        {
+            @Override
+            public int compare(MedicalDetails m1, MedicalDetails m2)
+            {
+                return m1.get_date().compareTo(m2.get_date());
+            }
+        });
+
+        List<MedicalDetails> latestRecords = new ArrayList<>();
+        for(int i = 0; i < 10; i++)
+        {
+            latestRecords.add(allRecords.get(i));
+        }
+
+        return latestRecords;
+    }
 
 
+    public List<Appointment> getLatestAppointments(String email) throws ExecutionException, InterruptedException, ParseException
+    {
+        List<Appointment> allRecords = getAppointments(email);
+        List<Appointment> toReturn = new ArrayList<>();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
 
+        for(int i = 0; i < allRecords.size(); i++)
+        {
+            Date date = formatter.parse(allRecords.get(i).getDate());
+            allRecords.get(i).set_date(date);
+        }
+        Collections.sort(allRecords, new Comparator<Appointment>()
+        {
+            @Override
+            public int compare(Appointment a1, Appointment a2)
+            {
+                return a1.get_date().compareTo(a2.get_date());
+            }
+        });
+
+        List<Appointment> latestRecords = new ArrayList<>();
+        for(int i = 0; i < 5; i++)
+        {
+            LocalDate currentDate = LocalDate.now();
+            LocalDate localDate = allRecords.get(i).get_date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+            localDate.isAfter(currentDate);
+            {
+                latestRecords.add(allRecords.get(i));
+            }
+        }
+        return latestRecords;
+    }
 
 
 
