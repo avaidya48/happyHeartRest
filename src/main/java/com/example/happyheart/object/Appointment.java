@@ -6,6 +6,16 @@ public class Appointment {
     private String details;
 
     private String email;
+    
+    private Date _date;
+
+    public Date get_date() {
+       return _date;
+    }
+
+    public void set_date(Date _date) {
+       this._date = _date;
+    }
 
     public String getDate() {
         return date;
