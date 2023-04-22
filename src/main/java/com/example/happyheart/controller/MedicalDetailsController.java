@@ -19,4 +19,16 @@ public class MedicalDetailsController
     public String createMedicalDetails(@RequestBody MedicalDetails medicalDetails) throws ExecutionException, InterruptedException {
         return firebaseService.createLatestMedicalDetails(medicalDetails);
     }
+    
+    @GetMapping("/getLatestMedicalDetails")
+    public List<MedicalDetails> getLatestMedicalDetails(@RequestHeader String username) throws ExecutionException, InterruptedException, ParseException
+    {
+        return firebaseService.getLatestMedicalDetails(username);
+    }
+
+    @GetMapping("/getAllMedicalDetails")
+    public List<MedicalDetails> getAllMedicalDetails(@RequestHeader String username) throws ExecutionException, InterruptedException, ParseException
+    {
+        return firebaseService.getAllMedicalDetails(username);
+    }
 }
