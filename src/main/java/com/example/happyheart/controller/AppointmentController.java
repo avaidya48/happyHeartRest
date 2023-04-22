@@ -20,4 +20,11 @@ public class AppointmentController
     public String register(@RequestBody Appointment appointment) throws ExecutionException, InterruptedException {
         return firebaseService.createAppointment(appointment);
     }
+    
+    @GetMapping("/createAppointment")
+    public List<Appointment> getLatestAppointments(@RequestHeader String email) throws ExecutionException, InterruptedException {
+        return firebaseService.getLatestAppointments(email);
+    }
+    
+    
 }
