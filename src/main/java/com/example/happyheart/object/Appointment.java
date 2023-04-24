@@ -1,12 +1,24 @@
 package com.example.happyheart.object;
 
+import java.util.Date;
+
 public class Appointment {
 
     private String date;
     private String details;
 
     private String email;
-    
+
+    private String time;
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
     private Date _date;
 
     public Date get_date() {

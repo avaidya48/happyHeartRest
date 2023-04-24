@@ -1,11 +1,23 @@
 package com.example.happyheart.object;
 
+import java.util.Date;
+
 public class MedicalDetails
 {
     private float diastolic_pressure;
     private float systolic_pressure;
     private float weight;
     private int heart_rate;
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    private String date;
 
     public String getEmail() {
         return email;

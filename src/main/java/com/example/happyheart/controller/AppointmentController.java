@@ -7,6 +7,7 @@ import com.example.happyheart.service.FirebaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -21,8 +22,8 @@ public class AppointmentController
         return firebaseService.createAppointment(appointment);
     }
     
-    @GetMapping("/createAppointment")
-    public List<Appointment> getLatestAppointments(@RequestHeader String email) throws ExecutionException, InterruptedException {
+    @GetMapping("/getLatestAppointments")
+    public List<Appointment> getLatestAppointments(@RequestHeader String email) throws ExecutionException, InterruptedException, ParseException {
         return firebaseService.getLatestAppointments(email);
     }
     

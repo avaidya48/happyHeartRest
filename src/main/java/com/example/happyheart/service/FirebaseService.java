@@ -9,8 +9,11 @@ import com.google.firebase.cloud.FirestoreClient;
 import com.google.firebase.database.IgnoreExtraProperties;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 
@@ -80,11 +83,17 @@ public class FirebaseService {
 
 
 
-    public String getAllMedicalDetails(MedicalDetails medicalDetails) throws ExecutionException, InterruptedException
-    {
+    public List<MedicalDetails> getAllMedicalDetails(String email) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
-        ApiFuture<WriteResult> collectionsApiFuture = dbFirestore.collection("medical_details").document().set(medicalDetails);
-        return collectionsApiFuture.get().getUpdateTime().toString();
+        CollectionReference medData = dbFirestore.collection("medical_details");
+        Query query = medData.whereEqualTo("email", email);
+        ApiFuture<QuerySnapshot> querySnapshot = query.get();
+
+        List<MedicalDetails> toReturn = new ArrayList<>();
+        for (DocumentSnapshot document : querySnapshot.get().getDocuments()) {
+            toReturn.add(document.toObject(MedicalDetails.class));
+        }
+        return toReturn;
     }
     
      public List<MedicalDetails> getLatestMedicalDetails(String email) throws ExecutionException, InterruptedException, ParseException
@@ -108,7 +117,8 @@ public class FirebaseService {
         });
 
         List<MedicalDetails> latestRecords = new ArrayList<>();
-        for(int i = 0; i < 10; i++)
+        Integer min = allRecords.size()<10 ? allRecords.size() : 10;
+        for(int i = 0; i < min; i++)
         {
             latestRecords.add(allRecords.get(i));
         }
@@ -137,8 +147,9 @@ public class FirebaseService {
             }
         });
 
+        Integer min = allRecords.size()<5 ? allRecords.size() : 5;
         List<Appointment> latestRecords = new ArrayList<>();
-        for(int i = 0; i < 5; i++)
+        for(int i = 0; i < min; i++)
         {
             LocalDate currentDate = LocalDate.now();
             LocalDate localDate = allRecords.get(i).get_date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -149,6 +160,13 @@ public class FirebaseService {
             }
         }
         return latestRecords;
+    }
+
+    public String createLatestMedicalDetails(MedicalDetails medicalDetails) throws ExecutionException, InterruptedException
+    {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        ApiFuture<WriteResult> collectionsApiFuture = dbFirestore.collection("medical_details").document().set(medicalDetails);
+        return collectionsApiFuture.get().getUpdateTime().toString();
     }
 
 
